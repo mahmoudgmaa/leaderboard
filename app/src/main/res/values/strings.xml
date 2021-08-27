@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">leaderBoard App</string>
+    <string name="welcome">welcome to LeaderBoard app</string>
+    <string name="enter">Enter your ID</string>
+</resources>

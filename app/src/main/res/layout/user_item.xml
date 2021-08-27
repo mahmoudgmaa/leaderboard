@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_80sdp"
+    android:layout_margin="@dimen/_15sdp"
+    android:background="@drawable/user_item_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/_5sdp"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/user_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rank"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/user_bananas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="number of bananas"
+            android:textSize="@dimen/_11ssp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="You"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:id="@+id/current_user"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_5sdp"/>
+
+</RelativeLayout>
