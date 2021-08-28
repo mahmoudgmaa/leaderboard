@@ -13,5 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-backend
-backend with firebase/functions/node_modules
+backend/node_modules
+backend_with_firebase

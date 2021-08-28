@@ -1,18 +1,17 @@
-const functions = require("firebase-functions");
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const cors = require("cors");
 
 const app = express();
-app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api/leaderbord", (req, res, next) => {
   const { currentUserId } = req.query;
   if (!currentUserId) {
-    throw new Error("missing current userid");
+    res.status(422);
+    res.json({ message: "missing currentUserId from query" });
+    return;
   }
   fs.readFile("./data/leaderboard.json", "utf-8", async (err, response) => {
     if (err) {
@@ -24,11 +23,10 @@ app.get("/api/leaderbord", (req, res, next) => {
       const users = Object.entries(data);
       const filteredUser = users.filter((user) => user[0] == currentUserId);
       if (filteredUser.length === 0) {
-        res.status(200);
+        res.status(500);
         res.json({
           message:
             "Current user id does not exist! Please specify an existing user id!",
-          displayedUsers: [],
         });
         return;
       } else {
@@ -86,10 +84,7 @@ app.get("/api/leaderbord", (req, res, next) => {
             }
           }
         });
-        // const lastDisplayedUsers = theDisplayedUsers.map((user) => ({
-        //   [user[0]]: user[1],
-        // }));
-
+        // const lastDisplayedUsers=theDisplayedUsers.map(user=>({[user[0]]:user[1]}))
         const lastDisplayedUsers = theDisplayedUsers.map((user) => {
           user[1].rank = user[0];
           return user[1];
@@ -112,11 +107,9 @@ app.use((error, req, res, next) => {
     return next(error);
   }
   res.status(error.code || 500);
-  res.json({ message: "An unknown error occured" });
+  res.json({ message: error.message || "An unknown error occured" });
 });
 
-// app.listen(process.env.PORT || 5001, () => {
-//   console.log("Serr server is running on port 5000");
-// });
-
-exports.expressApi = functions.https.onRequest(app);
+app.listen(process.env.PORT || 5000, () => {
+  console.log("Serr server is running on port 5000");
+});
